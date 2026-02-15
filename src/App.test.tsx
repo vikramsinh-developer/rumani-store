@@ -1,9 +1,20 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+jest.mock(
+  'react-router-dom',
+  () => ({
+    useNavigate: () => () => {},
+    Link: ({ to, children }: { to: string; children: React.ReactNode }) => (
+      <a href={to}>{children}</a>
+    ),
+  }),
+  { virtual: true }
+);
+
+import Header from './components/common/Header';
+
+test('renders site header', () => {
+  render(<Header onThemeToggle={() => {}} isDarkMode={false} />);
+  expect(screen.getByText(/^✨ Rumani Store$/)).toBeInTheDocument();
 });

@@ -1,0 +1,107 @@
+Folder PATH listing for volume Personal
+Volume serial number is FAAC-1E9B
+D:.
+|   App.css
+|   App.test.tsx
+|   App.tsx
+|   index.css
+|   index.tsx
+|   logo.svg
+|   react-app-env.d.ts
+|   reportWebVitals.ts
+|   setupTests.ts
+|   tree.txt
+|   
++---components
+|   +---auth
+|   |       AuthLayout.tsx
+|   |       LoginForm.tsx
+|   |       OTPInput.tsx
+|   |       OTPVerification.tsx
+|   |       SignupForm.tsx
+|   |       
+|   +---cart
+|   |       CartItem.tsx
+|   |       CartSummary.tsx
+|   |       ProceedCheckoutButtonProps.tsx
+|   |       
+|   +---common
+|   |       EmptyState.tsx
+|   |       Footer.tsx
+|   |       Header.tsx
+|   |       LoadingSpinner.tsx
+|   |       NotificationCenter.tsx
+|   |       PageHeader.tsx
+|   |       PriceDisplay.tsx
+|   |       QuantitySelector.tsx
+|   |       
+|   +---filters
+|   |       CategoryFilter.tsx
+|   |       MaterialFilter.tsx
+|   |       PriceRangeFilter.tsx
+|   |       SortOptions.tsx
+|   |       
+|   +---home
+|   |       CategoryShowcase.tsx
+|   |       FeaturedProducts.tsx
+|   |       HeroSection.tsx
+|   |       NewsletterSection.tsx
+|   |       PromoSection.tsx
+|   |       TestimonialCarousel.tsx
+|   |       
+|   +---layout
+|   |       MainLayout.tsx
+|   |       
+|   \---product
+|           ProductCard.tsx
+|           ProductGrid.tsx
+|           QuickViewModal.tsx
+|           
++---context
+|       NotificationContext.tsx
+|       
++---hooks
+|       useAuth.ts
+|       useCart.ts
+|       useDebounce.ts
+|       useFetch.ts
+|       useLocalStorage.ts
+|       usePagination.ts
+|       useWishlist.ts
+|       
++---mock
+|       products.ts
+|       
++---pages
+|       CartPage.tsx
+|       CheckoutPage.tsx
+|       HomePage.tsx
+|       LoginPage.tsx
+|       NotFoundPage.tsx
+|       OrderHistoryPage.tsx
+|       ProductDetailPage.tsx
+|       ProductListPage.tsx
+|       ProfilePage.tsx
+|       SignupPage.tsx
+|       ThankYouPage.tsx
+|       WishlistPage.tsx
+|       
++---services
+|       api.ts
+|       
++---store
+|       authStore.ts
+|       cartStore.ts
+|       notificationStore.ts
+|       wishlistStore.ts
+|       
++---theme
+|       theme.ts
+|       
++---types
+|       index.ts
+|       
+\---utils
+        constants.ts
+        validators.ts
+        
