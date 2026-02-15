@@ -29,6 +29,8 @@ import ProductDetailPage from './pages/ProductDetailPage';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const routerBasename =
+    process.env.NODE_ENV === 'production' ? process.env.PUBLIC_URL : '/';
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
@@ -41,7 +43,7 @@ function App() {
       <CssBaseline />
       <NotificationCenter />
       
-      <Router>
+      <Router basename={routerBasename}>
         <Routes>
           {/* Auth Routes - No Layout */}
           <Route path="/login" element={<LoginPage />} />
