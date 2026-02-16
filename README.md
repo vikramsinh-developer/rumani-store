@@ -36,7 +36,7 @@ Builds the app and publishes the build output to the `gh-pages` branch.
 To publish the app on GitHub Pages (and avoid the README-only page):
 
 1. Update the `homepage` field in `package.json` if you forked the repo.
-2. Run `npm run deploy` to push the build output to the `gh-pages` branch.
+2. Push to `main` (or run `npm run deploy` locally) to publish the build output to the `gh-pages` branch.
 3. In GitHub Pages settings, select the `gh-pages` branch as the source.
 
 ## Learn More
