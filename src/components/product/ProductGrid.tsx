@@ -26,7 +26,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
   onProductClick,
   onQuickView,
   columns = {
-    xs: 12,
+    xs: 6,
     sm: 6,
     md: 4,
     lg: 3,

@@ -19,12 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
 import { useWishlist } from '../../hooks/useWishlist';
 
-interface HeaderProps {
-  onThemeToggle: () => void;
-  isDarkMode: boolean;
-}
-
-const Header: React.FC<HeaderProps> = ({ onThemeToggle, isDarkMode }) => {
+const Header: React.FC = () => {
   const navigate = useNavigate();
   const { itemsCount: cartCount } = useCart();
   const { count: wishlistCount } = useWishlist();
@@ -97,9 +92,6 @@ const Header: React.FC<HeaderProps> = ({ onThemeToggle, isDarkMode }) => {
             <IconButton onClick={() => navigate('/profile')} aria-label="Profile">
               <AccountCircle />
             </IconButton>
-            <IconButton onClick={onThemeToggle} aria-label="Toggle theme">
-              {isDarkMode ? '☀️' : '🌙'}
-            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
@@ -136,13 +128,11 @@ const Header: React.FC<HeaderProps> = ({ onThemeToggle, isDarkMode }) => {
               <ListItemText primary="Profile" />
             </ListItemButton>
             <Divider sx={{ my: 1 }} />
-            <ListItemButton
-              onClick={() => {
-                onThemeToggle();
-                closeMobile();
-              }}
-            >
-              <ListItemText primary={isDarkMode ? 'Light mode' : 'Dark mode'} />
+            <ListItemButton onClick={() => go('/about')}>
+              <ListItemText primary="About Us" />
+            </ListItemButton>
+            <ListItemButton onClick={() => go('/faq')}>
+              <ListItemText primary="FAQ" />
             </ListItemButton>
           </List>
         </Box>

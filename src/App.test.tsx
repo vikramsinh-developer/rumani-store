@@ -15,6 +15,6 @@ jest.mock(
 import Header from './components/common/Header';
 
 test('renders site header', () => {
-  render(<Header onThemeToggle={() => {}} isDarkMode={false} />);
+  render(<Header />);
   expect(screen.getByText(/^✨ Rumani Store$/)).toBeInTheDocument();
 });

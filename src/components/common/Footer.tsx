@@ -23,6 +23,11 @@ const Footer: React.FC = () => {
             <Typography variant="body2" sx={{ lineHeight: 1.8 }}>
               Discover timeless elegance with our curated collection of antique jewelry in Rumani Store.
             </Typography>
+            <Box sx={{ mt: 1.5 }}>
+              <Link component={RouterLink} to="/about" underline="none" sx={{ color: '#DAA520' }}>
+                Learn more
+              </Link>
+            </Box>
           </Grid>
 
           {/* Quick Links */}
@@ -33,6 +38,12 @@ const Footer: React.FC = () => {
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               <Link component={RouterLink} to="/products" underline="none" sx={{ color: '#DAA520' }}>
                 Shop
+              </Link>
+              <Link component={RouterLink} to="/about" underline="none" sx={{ color: '#DAA520' }}>
+                About Us
+              </Link>
+              <Link component={RouterLink} to="/faq" underline="none" sx={{ color: '#DAA520' }}>
+                FAQ
               </Link>
               <Link component={RouterLink} to="/wishlist" underline="none" sx={{ color: '#DAA520' }}>
                 Wishlist
@@ -55,7 +66,7 @@ const Footer: React.FC = () => {
               <Link href="#" underline="none" sx={{ color: '#DAA520' }}>
                 Returns
               </Link>
-              <Link href="#" underline="none" sx={{ color: '#DAA520' }}>
+              <Link component={RouterLink} to="/faq" underline="none" sx={{ color: '#DAA520' }}>
                 FAQ
               </Link>
             </Box>

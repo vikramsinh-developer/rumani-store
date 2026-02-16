@@ -59,6 +59,14 @@ jest.mock('./pages/OrderDetailPage', () => ({
   __esModule: true,
   default: () => <div />,
 }));
+jest.mock('./pages/AboutPage', () => ({
+  __esModule: true,
+  default: () => <div />,
+}));
+jest.mock('./pages/FaqPage', () => ({
+  __esModule: true,
+  default: () => <div />,
+}));
 jest.mock('./pages/WishlistPage', () => ({ __esModule: true, default: () => <div /> }));
 jest.mock('./pages/ProductDetailPage', () => ({
   __esModule: true,

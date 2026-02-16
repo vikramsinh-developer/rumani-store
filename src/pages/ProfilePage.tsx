@@ -7,6 +7,7 @@ import {
   CardContent,
   Chip,
   Collapse,
+  Container,
   Divider,
   Grid,
   IconButton,
@@ -15,7 +16,9 @@ import {
   Stepper,
   TextField,
   Typography,
+  useMediaQuery,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PageHeader from '../components/common/PageHeader';
@@ -68,6 +71,8 @@ const ProfilePage: React.FC = () => {
   const { user, updateProfile, logout, hydrate } = useAuth();
   const navigate = useNavigate();
   const notify = useNotificationStore();
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
   const userId = user?.id ?? 'guest';
 
@@ -199,17 +204,17 @@ const ProfilePage: React.FC = () => {
 
   if (!user) {
     return (
-      <Box>
+      <Container maxWidth="sm">
         <PageHeader title="Profile" subtitle="Please login to view your profile." />
         <Button variant="contained" onClick={() => navigate('/login')}>
           Go to Login
         </Button>
-      </Box>
+      </Container>
     );
   }
 
   return (
-    <Box>
+    <Container maxWidth="lg">
       <PageHeader title="Profile" subtitle="Manage your account, addresses, and orders." />
 
       <Grid container spacing={3}>
@@ -298,7 +303,11 @@ const ProfilePage: React.FC = () => {
                           Total: ₹{o.totalAmount.toLocaleString()}
                         </Typography>
                         <Box sx={{ mt: 1 }}>
-                          <Stepper activeStep={activeStepFor(o.status as OrderStatus)} alternativeLabel>
+                            <Stepper
+                              activeStep={activeStepFor(o.status as OrderStatus)}
+                              alternativeLabel={!isSmall}
+                              orientation={isSmall ? 'vertical' : 'horizontal'}
+                            >
                             {orderSteps.map((s) => (
                               <Step key={s.key}>
                                 <StepLabel>{s.label}</StepLabel>
@@ -483,7 +492,7 @@ const ProfilePage: React.FC = () => {
           </Card>
         </Grid>
       </Grid>
-    </Box>
+    </Container>
   );
 };
 

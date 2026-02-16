@@ -2,11 +2,11 @@
 // MAIN APP FILE - src/App.tsx
 // ============================================================
 
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
-import theme, { darkTheme } from './theme/theme';
+import theme from './theme/theme';
 
 // Layouts
 import MainLayout from './components/layout/MainLayout';
@@ -26,20 +26,15 @@ import OrderHistoryPage from './pages/OrderHistoryPage';
 import OrderDetailPage from './pages/OrderDetailPage';
 import WishlistPage from './pages/WishlistPage';
 import ProductDetailPage from './pages/ProductDetailPage';
+import AboutPage from './pages/AboutPage';
+import FaqPage from './pages/FaqPage';
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const routerBasename =
     process.env.NODE_ENV === 'production' ? process.env.PUBLIC_URL : '/';
 
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
-  const currentTheme = isDarkMode ? darkTheme : theme;
-
   return (
-    <ThemeProvider theme={currentTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <NotificationCenter />
       
@@ -48,11 +43,10 @@ function App() {
           {/* Auth Routes - No Layout */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/thank-you" element={<ThankYouPage />} />
 
           {/* Main Routes - With Layout */}
           <Route
-            element={<MainLayout onThemeToggle={toggleTheme} isDarkMode={isDarkMode} />}
+            element={<MainLayout />}
           >
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<ProductListPage />} />
@@ -60,9 +54,12 @@ function App() {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/thank-you" element={<ThankYouPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/orders" element={<OrderHistoryPage />} />
             <Route path="/orders/:id" element={<OrderDetailPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/faq" element={<FaqPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>

@@ -7,15 +7,10 @@ import { Box } from '@mui/material';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
 
-interface MainLayoutProps {
-  onThemeToggle: () => void;
-  isDarkMode: boolean;
-}
-
-const MainLayout: React.FC<MainLayoutProps> = ({ onThemeToggle, isDarkMode }) => {
+const MainLayout: React.FC = () => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Header onThemeToggle={onThemeToggle} isDarkMode={isDarkMode} />
+      <Header />
       
       <Box
         component="main"

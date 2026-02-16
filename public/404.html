@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rumani Store</title>
+    <script>
+      // GitHub Pages SPA redirect (for BrowserRouter deep links)
+      // Keeps the repo name segment (e.g. /rumani-store) and moves the rest into ?/...
+      (function () {
+        var pathSegmentsToKeep = 1;
+        var l = window.location;
+        var segments = l.pathname.split('/');
+
+        // Build: /<repo>/?/<rest-of-path>
+        var newPath = segments.slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' + segments.slice(1 + pathSegmentsToKeep).join('/');
+        if (l.search) {
+          newPath += '&' + l.search.slice(1);
+        }
+        var newUrl = l.protocol + '//' + l.host + newPath + l.hash;
+        l.replace(newUrl);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

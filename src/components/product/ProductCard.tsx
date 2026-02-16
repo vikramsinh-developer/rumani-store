@@ -16,7 +16,7 @@ import {
   Rating,
   Chip,
 } from '@mui/material';
-import { FavoriteBorderOutlined, FavoriteBorder } from '@mui/icons-material';
+import { FavoriteBorderOutlined, Favorite } from '@mui/icons-material';
 import { Product } from '../../types';
 import { useCart } from '../../hooks/useCart';
 import { useWishlist } from '../../hooks/useWishlist';
@@ -29,9 +29,10 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = memo(
   ({ product, onProductClick, onQuickView }) => {
-    const { addToCart } = useCart();
+    const { addToCart, items } = useCart();
     const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
     const inWishlist = isInWishlist(product.id);
+    const inCart = items.some((it) => it.id === product.id);
 
     const handleAddToCart = (e: React.MouseEvent) => {
       e.stopPropagation();
@@ -79,10 +80,10 @@ const ProductCard: React.FC<ProductCardProps> = memo(
           <Box sx={{ position: 'relative', overflow: 'hidden', bgcolor: '#f5f5f0' }}>
             <CardMedia
               component="img"
-              height="300"
               image={product.thumbnailImage}
               alt={product.name}
               sx={{
+                height: { xs: 180, sm: 260, md: 300 },
                 transition: 'transform 0.3s ease',
                 '&:hover': {
                   transform: 'scale(1.08)',
@@ -135,11 +136,7 @@ const ProductCard: React.FC<ProductCardProps> = memo(
               }}
               size="small"
             >
-              {inWishlist ? (
-                <FavoriteBorder sx={{ color: '#B8860B' }} />
-              ) : (
-                <FavoriteBorderOutlined />
-              )}
+              {inWishlist ? <Favorite sx={{ color: '#B8860B' }} /> : <FavoriteBorderOutlined />}
             </IconButton>
           </Box>
 
@@ -209,27 +206,27 @@ const ProductCard: React.FC<ProductCardProps> = memo(
           </CardContent>
 
           {/* Actions Section */}
-          <CardActions sx={{ gap: 1, pt: 2, flexDirection: 'column' }}>
+          <CardActions sx={{ gap: 1, pt: 1.5, pb: 2, px: 2, flexDirection: 'column' }}>
             <Button
-              fullWidth
               variant="contained"
               onClick={handleAddToCart}
-              disabled={!product.inStock}
+              disabled={!product.inStock || inCart}
+              fullWidth
               sx={{
                 bgcolor: '#B8860B',
                 color: 'white',
-                py: 1.5,
+                py: { xs: 1, sm: 1.25 },
                 '&:hover': {
                   bgcolor: '#DAA520',
                 },
               }}
             >
-              Add to Cart
+              {inCart ? 'Added to Cart' : 'Add to Cart'}
             </Button>
             <Button
-              fullWidth
               variant="outlined"
               onClick={handleQuickView}
+              fullWidth
               sx={{
                 borderColor: '#B8860B',
                 color: '#B8860B',

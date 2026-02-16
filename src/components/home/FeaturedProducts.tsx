@@ -33,7 +33,7 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
 
       <ProductGrid
         products={products}
-        columns={{ xs: 12, sm: 6, md: 4, lg: 3 }}
+        columns={{ xs: 6, sm: 6, md: 4, lg: 3 }}
         onProductClick={(p) => navigate(`/products/${p.id}`)}
       />
     </Box>
