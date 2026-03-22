@@ -33,15 +33,15 @@ Builds the app and publishes the build output to the `gh-pages` branch.
 
 ## GitHub Pages Deployment
 
+This repository deploys GitHub Pages with the workflow in `.github/workflows/deploy.yml`.
+
 To publish the app on GitHub Pages (and avoid the README-only page):
 
 1. Update the `homepage` field in `package.json` if you forked the repo.
-2. Push to `main` (or run `npm run deploy` locally) to publish the build output to the `gh-pages` branch.
-3. In GitHub repo **Settings → Pages**, set **Source** to `Deploy from a branch` and select:
-	- **Branch:** `gh-pages`
-	- **Folder:** `/ (root)`
+2. Push to `main` so the `Deploy to GitHub Pages` workflow builds and uploads the React app.
+3. In GitHub repo **Settings → Pages**, set **Source** to **GitHub Actions**.
 
-If GitHub Pages is set to `main` / `(root)`, GitHub will render the repository content and you may only see `README.md`.
+If GitHub Pages is set to `main` / `(root)` or another branch source, GitHub will render the repository content and you may only see `README.md` instead of the built website.
 
 ## Learn More
 
