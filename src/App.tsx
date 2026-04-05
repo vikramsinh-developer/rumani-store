@@ -2,9 +2,10 @@
 // MAIN APP FILE - src/App.tsx
 // ============================================================
 
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
+import { useEffect } from 'react';
 import theme from './theme/theme';
 
 // Layouts
@@ -28,11 +29,23 @@ import ProductDetailPage from './pages/ProductDetailPage';
 import AboutPage from './pages/AboutPage';
 import FaqPage from './pages/FaqPage';
 
+// Scroll to top component
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <NotificationCenter />
+      <ScrollToTop />
       
       <Routes>
         {/* Auth Routes - No Layout */}
