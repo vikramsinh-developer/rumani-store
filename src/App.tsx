@@ -2,8 +2,7 @@
 // MAIN APP FILE - src/App.tsx
 // ============================================================
 
-import React from 'react';
-import { Routes, Route, Router } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import theme from './theme/theme';
