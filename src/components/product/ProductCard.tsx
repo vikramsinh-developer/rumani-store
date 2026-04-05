@@ -83,7 +83,7 @@ const ProductCard: React.FC<ProductCardProps> = memo(
               image={product.thumbnailImage}
               alt={product.name}
               sx={{
-                height: { xs: 180, sm: 260, md: 300 },
+                height: { xs: 150, sm: 210, md: 230 },
                 transition: 'transform 0.3s ease',
                 '&:hover': {
                   transform: 'scale(1.08)',
@@ -141,14 +141,14 @@ const ProductCard: React.FC<ProductCardProps> = memo(
           </Box>
 
           {/* Content Section */}
-          <CardContent sx={{ flexGrow: 1, pb: 0 }}>
+          <CardContent sx={{ flexGrow: 1, pb: 0, px: { xs: 1.5, sm: 2 }, pt: { xs: 1.25, sm: 1.5 } }}>
             <Typography
               gutterBottom
               variant="body2"
               sx={{
                 color: '#999999',
                 textTransform: 'uppercase',
-                fontSize: '0.75rem',
+                fontSize: '0.7rem',
                 fontWeight: 600,
                 letterSpacing: '0.1em',
               }}
@@ -157,11 +157,11 @@ const ProductCard: React.FC<ProductCardProps> = memo(
             </Typography>
 
             <Typography
-              variant="h6"
+              variant="subtitle1"
               sx={{
                 fontWeight: 600,
-                mb: 1,
-                minHeight: '2.5rem',
+                mb: 0.75,
+                minHeight: '2.2rem',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 display: '-webkit-box',
@@ -173,7 +173,7 @@ const ProductCard: React.FC<ProductCardProps> = memo(
             </Typography>
 
             {/* Rating */}
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.25 }}>
               <Rating value={product.rating} readOnly size="small" precision={0.5} />
               <Typography variant="caption" sx={{ color: '#999999' }}>
                 ({product.reviewsCount})
@@ -183,7 +183,7 @@ const ProductCard: React.FC<ProductCardProps> = memo(
             {/* Price */}
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <Typography
-                variant="h6"
+                variant="subtitle1"
                 sx={{
                   fontWeight: 700,
                   color: '#B8860B',
@@ -206,16 +206,19 @@ const ProductCard: React.FC<ProductCardProps> = memo(
           </CardContent>
 
           {/* Actions Section */}
-          <CardActions sx={{ gap: 1, pt: 1.5, pb: 2, px: 2, flexDirection: 'column' }}>
+          <CardActions
+            sx={{ gap: 1, pt: 1.25, pb: 1.75, px: { xs: 1.5, sm: 2 }, flexDirection: 'column' }}
+          >
             <Button
               variant="contained"
               onClick={handleAddToCart}
               disabled={!product.inStock || inCart}
               fullWidth
+              size="small"
               sx={{
                 bgcolor: '#B8860B',
                 color: 'white',
-                py: { xs: 1, sm: 1.25 },
+                py: 0.9,
                 '&:hover': {
                   bgcolor: '#DAA520',
                 },
@@ -227,6 +230,7 @@ const ProductCard: React.FC<ProductCardProps> = memo(
               variant="outlined"
               onClick={handleQuickView}
               fullWidth
+              size="small"
               sx={{
                 borderColor: '#B8860B',
                 color: '#B8860B',

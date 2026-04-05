@@ -9,6 +9,10 @@ import {
   Collapse,
   Container,
   Divider,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   Grid,
   IconButton,
   Step,
@@ -82,10 +86,25 @@ const ProfilePage: React.FC = () => {
 
   const [firstName, setFirstName] = React.useState(user?.firstName ?? '');
   const [lastName, setLastName] = React.useState(user?.lastName ?? '');
+  const [gender, setGender] = React.useState(user?.gender ?? '');
+  const [dob, setDob] = React.useState(user?.dob ?? '');
+  const [alternatePhone, setAlternatePhone] = React.useState(user?.alternatePhone ?? '');
+  const [city, setCity] = React.useState(user?.city ?? '');
+  const [country, setCountry] = React.useState(user?.country ?? '');
+  const [bio, setBio] = React.useState(user?.bio ?? '');
+
+  const [optionalOpen, setOptionalOpen] = React.useState(false);
+  const [logoutConfirmOpen, setLogoutConfirmOpen] = React.useState(false);
 
   React.useEffect(() => {
     setFirstName(user?.firstName ?? '');
     setLastName(user?.lastName ?? '');
+    setGender(user?.gender ?? '');
+    setDob(user?.dob ?? '');
+    setAlternatePhone(user?.alternatePhone ?? '');
+    setCity(user?.city ?? '');
+    setCountry(user?.country ?? '');
+    setBio(user?.bio ?? '');
   }, [user]);
 
   const [addresses, setAddresses] = useLocalStorage<Address[]>(`aj_addresses_${userId}`, [
@@ -222,7 +241,7 @@ const ProfilePage: React.FC = () => {
           <Card>
             <CardContent>
               <Typography variant="h6" sx={{ fontWeight: 800, mb: 2 }}>
-                Personal details
+                Profile details
               </Typography>
 
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2, flexWrap: 'wrap' }}>
@@ -253,19 +272,127 @@ const ProfilePage: React.FC = () => {
                 </Box>
               </Box>
 
-              <Box sx={{ display: 'grid', gap: 2 }}>
-                <TextField label="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                <TextField label="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                <TextField label="Email" value={user.email} disabled />
-                <TextField label="Phone" value={user.phone} disabled />
+              <Grid container spacing={2}>
+                <Grid size={{ xs: 12, sm: 6 }}>
+                  <TextField
+                    fullWidth
+                    label="First name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </Grid>
+                <Grid size={{ xs: 12, sm: 6 }}>
+                  <TextField
+                    fullWidth
+                    label="Last name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
+                </Grid>
+                <Grid size={{ xs: 12 }}>
+                  <TextField fullWidth label="Email" value={user.email} disabled />
+                </Grid>
+                <Grid size={{ xs: 12 }}>
+                  <TextField fullWidth label="Phone" value={user.phone} disabled />
+                </Grid>
 
-                <Button
-                  variant="contained"
-                  onClick={() => updateProfile({ firstName, lastName })}
-                >
-                  Save changes
+                <Grid size={{ xs: 12 }}>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    onClick={() => {
+                      updateProfile({ firstName, lastName });
+                      notify.push('Profile updated.', 'success');
+                    }}
+                  >
+                    Save profile
+                  </Button>
+                </Grid>
+              </Grid>
+
+              <Divider sx={{ my: 2.5 }} />
+
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
+                <Typography variant="subtitle1" sx={{ fontWeight: 900 }}>
+                  Optional details
+                </Typography>
+                <Button variant="text" onClick={() => setOptionalOpen((v) => !v)}>
+                  {optionalOpen ? 'Hide' : 'Add more'}
                 </Button>
               </Box>
+
+              <Collapse in={optionalOpen} unmountOnExit>
+                <Box sx={{ mt: 2 }}>
+                  <Grid container spacing={2}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
+                      <TextField
+                        fullWidth
+                        select
+                        label="Gender"
+                        value={gender}
+                        onChange={(e) => setGender(e.target.value)}
+                        SelectProps={{ native: true }}
+                      >
+                        <option value="">Prefer not to say</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                      </TextField>
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }}>
+                      <TextField
+                        fullWidth
+                        label="Date of birth"
+                        type="date"
+                        value={dob}
+                        onChange={(e) => setDob(e.target.value)}
+                        InputLabelProps={{ shrink: true }}
+                      />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }}>
+                      <TextField
+                        fullWidth
+                        label="Alternate phone"
+                        value={alternatePhone}
+                        onChange={(e) => setAlternatePhone(e.target.value)}
+                      />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }}>
+                      <TextField fullWidth label="City" value={city} onChange={(e) => setCity(e.target.value)} />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }}>
+                      <TextField
+                        fullWidth
+                        label="Country"
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                      />
+                    </Grid>
+                    <Grid size={{ xs: 12 }}>
+                      <TextField
+                        fullWidth
+                        label="Bio"
+                        value={bio}
+                        onChange={(e) => setBio(e.target.value)}
+                        multiline
+                        minRows={3}
+                      />
+                    </Grid>
+                    <Grid size={{ xs: 12 }}>
+                      <Button
+                        fullWidth
+                        variant="outlined"
+                        onClick={() => {
+                          updateProfile({ gender, dob, alternatePhone, city, country, bio });
+                          notify.push('Optional details saved.', 'success');
+                        }}
+                      >
+                        Save optional details
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Collapse>
             </CardContent>
           </Card>
         </Grid>
@@ -484,7 +611,7 @@ const ProfilePage: React.FC = () => {
                 <Button variant="outlined" onClick={() => navigate('/orders')}>
                   Order history
                 </Button>
-                <Button color="error" variant="contained" onClick={() => { logout(); navigate('/'); }}>
+                <Button color="error" variant="contained" onClick={() => setLogoutConfirmOpen(true)}>
                   Logout
                 </Button>
               </Box>
@@ -492,6 +619,30 @@ const ProfilePage: React.FC = () => {
           </Card>
         </Grid>
       </Grid>
+
+      <Dialog open={logoutConfirmOpen} onClose={() => setLogoutConfirmOpen(false)}>
+        <DialogTitle>Confirm logout</DialogTitle>
+        <DialogContent>
+          <Typography variant="body2" color="text.secondary">
+            Are you sure you want to logout from your account?
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setLogoutConfirmOpen(false)}>Cancel</Button>
+          <Button
+            color="error"
+            variant="contained"
+            onClick={() => {
+              logout();
+              setLogoutConfirmOpen(false);
+              notify.push('Logged out.', 'success');
+              navigate('/');
+            }}
+          >
+            Logout
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };

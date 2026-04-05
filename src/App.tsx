@@ -3,7 +3,7 @@
 // ============================================================
 
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route, Router } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import theme from './theme/theme';
@@ -30,19 +30,15 @@ import AboutPage from './pages/AboutPage';
 import FaqPage from './pages/FaqPage';
 
 function App() {
-  const routerBasename =
-    process.env.NODE_ENV === 'production' ? process.env.PUBLIC_URL : '/';
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <NotificationCenter />
       
-      <Router basename={routerBasename}>
-        <Routes>
-          {/* Auth Routes - No Layout */}
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+      <Routes>
+        {/* Auth Routes - No Layout */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
 
           {/* Main Routes - With Layout */}
           <Route
@@ -63,9 +59,9 @@ function App() {
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
-      </Router>
     </ThemeProvider>
-  );
+   );
+    
 }
 
 export default App;

@@ -17,6 +17,7 @@ interface ProductGridProps {
     sm: number;
     md: number;
     lg: number;
+    xl?: number;
   };
 }
 
@@ -27,9 +28,10 @@ const ProductGrid: React.FC<ProductGridProps> = ({
   onQuickView,
   columns = {
     xs: 6,
-    sm: 6,
-    md: 4,
-    lg: 3,
+    sm: 4,
+    md: 3,
+    lg: 2,
+    xl: 2,
   },
 }) => {
   if (loading) {
@@ -54,9 +56,12 @@ const ProductGrid: React.FC<ProductGridProps> = ({
   }
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={{ xs: 1.5, sm: 2, md: 2.5 }}>
       {products.map((product) => (
-        <Grid size={{xs:columns.xs, sm:columns.sm, md:columns.md, lg:columns.lg}} key={product.id}>
+        <Grid
+          size={{ xs: columns.xs, sm: columns.sm, md: columns.md, lg: columns.lg, xl: columns.xl }}
+          key={product.id}
+        >
           <ProductCard
             product={product}
             onProductClick={onProductClick}

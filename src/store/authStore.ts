@@ -7,6 +7,12 @@ export interface AuthUser {
   email: string;
   phone: string;
   avatar?: string;
+  gender?: string;
+  dob?: string;
+  alternatePhone?: string;
+  city?: string;
+  country?: string;
+  bio?: string;
 }
 
 interface AuthState {

@@ -8,6 +8,7 @@ import {
   Badge,
   Drawer,
   List,
+  ListSubheader,
   ListItemButton,
   ListItemText,
   Divider,
@@ -15,6 +16,15 @@ import {
 } from '@mui/material';
 import { ShoppingCart, Favorite, AccountCircle } from '@mui/icons-material';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+import HomeIcon from '@mui/icons-material/Home';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import StarIcon from '@mui/icons-material/Star';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import PersonIcon from '@mui/icons-material/Person';
+import InfoIcon from '@mui/icons-material/Info';
+import HelpIcon from '@mui/icons-material/Help';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
 import { useWishlist } from '../../hooks/useWishlist';
@@ -101,45 +111,102 @@ const Header: React.FC = () => {
         onClose={closeMobile}
         sx={{
           display: { xs: 'block', md: 'none' },
-          '& .MuiDrawer-paper': { width: 280 },
+          '& .MuiDrawer-paper': { width: 300 },
         }}
       >
-        <Box sx={{ p: 2 }}>
-          <Typography sx={{ fontWeight: 800, color: '#B8860B', mb: 1.5 }}>
-            Rumani Store
-          </Typography>
-          <Divider sx={{ mb: 1 }} />
-
-          <List sx={{ p: 0 }}>
-            <ListItemButton onClick={() => go('/products')}>
-              <ListItemText primary="Shop" />
-            </ListItemButton>
-            <ListItemButton onClick={() => go('/products?sort=rating')}>
-              <ListItemText primary="Best Sellers" />
-            </ListItemButton>
-            <Divider sx={{ my: 1 }} />
-            <ListItemButton onClick={() => go('/wishlist')}>
-              <ListItemText primary="Wishlist" />
-            </ListItemButton>
-            <ListItemButton onClick={() => go('/cart')}>
-              <ListItemText primary="Cart" />
-            </ListItemButton>
-            <ListItemButton onClick={() => go('/profile')}>
-              <ListItemText primary="Profile" />
-            </ListItemButton>
-            <Divider sx={{ my: 1 }} />
-            <ListItemButton onClick={() => go('/about')}>
-              <ListItemText primary="About Us" />
-            </ListItemButton>
-            <ListItemButton onClick={() => go('/faq')}>
-              <ListItemText primary="FAQ" />
-            </ListItemButton>
-          </List>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: 2, py: 1.5 }}>
+          <Typography sx={{ fontWeight: 900, color: '#B8860B' }}>Rumani Store</Typography>
+          <IconButton aria-label="Close menu" onClick={closeMobile}>
+            <CloseIcon />
+          </IconButton>
         </Box>
+
+        <Divider />
+
+        <List
+          sx={{ p: 0 }}
+          subheader={
+            <ListSubheader component="div" disableSticky sx={{ bgcolor: 'transparent', fontWeight: 900 }}>
+              Browse
+            </ListSubheader>
+          }
+        >
+          <ListItemButton onClick={() => go('/') }>
+            <Box sx={{ mr: 1.5, display: 'inline-flex' }}>
+              <HomeIcon fontSize="small" />
+            </Box>
+            <ListItemText primary="Home" />
+          </ListItemButton>
+          <ListItemButton onClick={() => go('/products')}>
+            <Box sx={{ mr: 1.5, display: 'inline-flex' }}>
+              <StorefrontIcon fontSize="small" />
+            </Box>
+            <ListItemText primary="Shop" />
+          </ListItemButton>
+          <ListItemButton onClick={() => go('/products?sort=rating')}>
+            <Box sx={{ mr: 1.5, display: 'inline-flex' }}>
+              <StarIcon fontSize="small" />
+            </Box>
+            <ListItemText primary="Best Sellers" />
+          </ListItemButton>
+        </List>
+
+        <Divider />
+
+        <List
+          sx={{ p: 0 }}
+          subheader={
+            <ListSubheader component="div" disableSticky sx={{ bgcolor: 'transparent', fontWeight: 900 }}>
+              Account
+            </ListSubheader>
+          }
+        >
+          <ListItemButton onClick={() => go('/wishlist')}>
+            <Box sx={{ mr: 1.5, display: 'inline-flex' }}>
+              <FavoriteIcon fontSize="small" />
+            </Box>
+            <ListItemText primary="Wishlist" secondary={wishlistCount ? `${wishlistCount} item(s)` : undefined} />
+          </ListItemButton>
+          <ListItemButton onClick={() => go('/cart')}>
+            <Box sx={{ mr: 1.5, display: 'inline-flex' }}>
+              <ShoppingCartIcon fontSize="small" />
+            </Box>
+            <ListItemText primary="Cart" secondary={cartCount ? `${cartCount} item(s)` : undefined} />
+          </ListItemButton>
+          <ListItemButton onClick={() => go('/profile')}>
+            <Box sx={{ mr: 1.5, display: 'inline-flex' }}>
+              <PersonIcon fontSize="small" />
+            </Box>
+            <ListItemText primary="Profile" />
+          </ListItemButton>
+        </List>
+
+        <Divider />
+
+        <List
+          sx={{ p: 0 }}
+          subheader={
+            <ListSubheader component="div" disableSticky sx={{ bgcolor: 'transparent', fontWeight: 900 }}>
+              Info
+            </ListSubheader>
+          }
+        >
+          <ListItemButton onClick={() => go('/about')}>
+            <Box sx={{ mr: 1.5, display: 'inline-flex' }}>
+              <InfoIcon fontSize="small" />
+            </Box>
+            <ListItemText primary="About Us" />
+          </ListItemButton>
+          <ListItemButton onClick={() => go('/faq')}>
+            <Box sx={{ mr: 1.5, display: 'inline-flex' }}>
+              <HelpIcon fontSize="small" />
+            </Box>
+            <ListItemText primary="FAQ" />
+          </ListItemButton>
+        </List>
       </Drawer>
     </>
   );
-
 };
 
 export default Header;
